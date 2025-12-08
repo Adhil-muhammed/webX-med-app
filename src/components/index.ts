@@ -5,4 +5,7 @@ export { PromotionalBanner } from "./PromotionalBanner";
 export { DoctorCard } from "./DoctorCard";
 export { BottomNavigation } from "./BottomNavigation";
 export { HomeScreen } from "./HomeScreen";
-
+export { StatsHighlight } from "./StatsHighlight";
+export { CompactDoctorCard } from "./CompactDoctorCard";
+export { InfoListCard } from "./InfoListCard";
+export { PatientStoryCard } from "./PatientStoryCard";
