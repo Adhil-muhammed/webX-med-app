@@ -1,22 +1,22 @@
 import { useState } from "react";
 import { AppBar } from "./AppBar";
 import { SearchBar } from "./SearchBar";
-import { CategoryCard } from "./CategoryCard";
+// import { CategoryCard } from "./CategoryCard";
 import { PromotionalBanner } from "./PromotionalBanner";
 import { DoctorCard } from "./DoctorCard";
 import { BottomNavigation } from "./BottomNavigation";
-import {
-  Stethoscope,
-  Sparkles,
-  TestTube,
-  Heart,
-  CloudRain,
-  ShieldCheck,
-  Leaf,
-} from "lucide-react";
+// import {
+//   Stethoscope,
+//   Sparkles,
+//   TestTube,
+//   Heart,
+//   CloudRain,
+//   ShieldCheck,
+//   Leaf,
+// } from "lucide-react";
 import { StatsHighlight } from "./StatsHighlight";
 import { CompactDoctorCard } from "./CompactDoctorCard";
-import { InfoListCard } from "./InfoListCard";
+// import { InfoListCard } from "./InfoListCard";
 import { PatientStoryCard } from "./PatientStoryCard";
 import { cn } from "@/lib/utils";
 
@@ -89,19 +89,19 @@ export const HomeScreen = ({
   doctors = defaultDoctors,
   className,
   onNotificationClick,
-  onCategoryClick,
+  // onCategoryClick,
   onDoctorBookClick,
   onBannerClick,
 }: HomeScreenProps) => {
   const [activeAvailabilityTab, setActiveAvailabilityTab] =
     useState("Available Now");
 
-  const categories = [
-    { icon: Stethoscope, label: "Dentist", color: "primary" as const },
-    { icon: Sparkles, label: "Ayurveda", color: "secondary" as const },
-    { icon: TestTube, label: "Lab", color: "primary" as const },
-    { icon: Heart, label: "Physician", color: "primary" as const },
-  ];
+  // const categories = [
+  //   { icon: Stethoscope, label: "Dentist", color: "primary" as const },
+  //   { icon: Sparkles, label: "Ayurveda", color: "secondary" as const },
+  //   { icon: TestTube, label: "Lab", color: "primary" as const },
+  //   { icon: Heart, label: "Physician", color: "primary" as const },
+  // ];
 
   const stats = [
     { label: "Verified Doctors", value: "2,450+" },
@@ -139,26 +139,26 @@ export const HomeScreen = ({
     },
   ];
 
-  const infoItems = [
-    {
-      icon: CloudRain,
-      title: "Monsoon Health Tips",
-      description: "Stay safe this rainy season",
-      iconColor: "primary" as const,
-    },
-    {
-      icon: ShieldCheck,
-      title: "Common Conditions",
-      description: "Learn about local ailments",
-      iconColor: "secondary" as const,
-    },
-    {
-      icon: Leaf,
-      title: "Local Health Schemes",
-      description: "KAHS, PMJAY & more",
-      iconColor: "primary" as const,
-    },
-  ];
+  // const infoItems = [
+  //   {
+  //     icon: CloudRain,
+  //     title: "Monsoon Health Tips",
+  //     description: "Stay safe this rainy season",
+  //     iconColor: "primary" as const,
+  //   },
+  //   {
+  //     icon: ShieldCheck,
+  //     title: "Common Conditions",
+  //     description: "Learn about local ailments",
+  //     iconColor: "secondary" as const,
+  //   },
+  //   {
+  //     icon: Leaf,
+  //     title: "Local Health Schemes",
+  //     description: "KAHS, PMJAY & more",
+  //     iconColor: "primary" as const,
+  //   },
+  // ];
 
   const stories = [
     {
