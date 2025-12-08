@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Link, useLocation } from "react-router-dom";
 import { Home, Calendar, FolderOpen, User } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -10,9 +11,7 @@ interface NavItem {
     }
   >;
   label: string;
-  href?: string;
-  active?: boolean;
-  onClick?: () => void;
+  path: string;
 }
 
 interface BottomNavigationProps {
@@ -24,23 +23,22 @@ const defaultItems: NavItem[] = [
   {
     icon: Home,
     label: "Home",
-    href: "#",
-    active: true,
+    path: "/",
   },
   {
     icon: Calendar,
     label: "Appointments",
-    href: "#",
+    path: "/appointments",
   },
   {
     icon: FolderOpen,
     label: "Records",
-    href: "#",
+    path: "/records",
   },
   {
     icon: User,
     label: "Profile",
-    href: "#",
+    path: "/profile",
   },
 ];
 
@@ -48,6 +46,8 @@ export const BottomNavigation = ({
   items = defaultItems,
   className,
 }: BottomNavigationProps) => {
+  const location = useLocation();
+
   return (
     <nav
       className={cn(
@@ -65,11 +65,12 @@ export const BottomNavigation = ({
     >
       {items.map((item, index) => {
         const Icon = item.icon;
-        const Component = item.href ? "a" : "button";
+        const isActive = location.pathname === item.path;
 
         return (
-          <Component
+          <Link
             key={index}
+            to={item.path}
             className={cn(
               "flex flex-col items-center justify-center gap-1",
               "min-w-[64px] min-h-[64px] sm:min-h-[80px]",
@@ -78,36 +79,30 @@ export const BottomNavigation = ({
               "transition-all duration-200",
               "active:scale-95",
               "touch-manipulation",
-              item.active
+              "no-underline",
+              isActive
                 ? "text-primary"
                 : "text-text-secondary-light dark:text-text-secondary-dark"
             )}
-            href={item.href}
-            onClick={(e) => {
-              if (item.onClick) {
-                e.preventDefault();
-                item.onClick();
-              }
-            }}
             aria-label={item.label}
-            aria-current={item.active ? "page" : undefined}
+            aria-current={isActive ? "page" : undefined}
           >
             <div
               className={cn(
                 "relative flex items-center justify-center",
                 "transition-transform duration-200",
-                item.active && "scale-110"
+                isActive && "scale-110"
               )}
             >
               <Icon
                 size={22}
                 className={cn(
                   "transition-all duration-200",
-                  item.active ? "fill-current" : ""
+                  isActive ? "fill-current" : ""
                 )}
-                strokeWidth={item.active ? 2.5 : 2}
+                strokeWidth={isActive ? 2.5 : 2}
               />
-              {item.active && (
+              {isActive && (
                 <span
                   className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-primary"
                   aria-hidden="true"
@@ -118,12 +113,12 @@ export const BottomNavigation = ({
               className={cn(
                 "text-[11px] sm:text-xs leading-tight",
                 "transition-all duration-200",
-                item.active ? "font-bold" : "font-medium"
+                isActive ? "font-bold" : "font-medium"
               )}
             >
               {item.label}
             </span>
-          </Component>
+          </Link>
         );
       })}
     </nav>

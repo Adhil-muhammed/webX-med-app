@@ -1,12 +1,16 @@
-import { HomeScreen } from "@/components/HomeScreen";
+import { Routes, Route } from "react-router-dom";
+import { HomePage } from "@/pages/Home";
+import { AppointmentsPage } from "@/components/AppointmentsPage";
+import { RecordsPage } from "@/components/RecordsPage";
+import { ProfilePage } from "@/components/ProfilePage";
 
 export const App = () => {
   return (
-    <HomeScreen
-      onNotificationClick={() => console.log("Notification clicked")}
-      onCategoryClick={(category) => console.log("Category clicked:", category)}
-      onDoctorBookClick={(doctor) => console.log("Book doctor:", doctor)}
-      onBannerClick={() => console.log("Banner clicked")}
-    />
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/appointments" element={<AppointmentsPage />} />
+      <Route path="/records" element={<RecordsPage />} />
+      <Route path="/profile" element={<ProfilePage />} />
+    </Routes>
   );
 };
