@@ -5,15 +5,6 @@ import { SearchBar } from "./SearchBar";
 // import { PromotionalBanner } from "./PromotionalBanner";
 import { DoctorCard } from "./DoctorCard";
 import { BottomNavigation } from "./BottomNavigation";
-// import {
-//   Stethoscope,
-//   Sparkles,
-//   TestTube,
-//   Heart,
-//   CloudRain,
-//   ShieldCheck,
-//   Leaf,
-// } from "lucide-react";
 import { StatsHighlight } from "./StatsHighlight";
 import { CompactDoctorCard } from "./CompactDoctorCard";
 // import { InfoListCard } from "./InfoListCard";
@@ -21,23 +12,18 @@ import { PatientStoryCard } from "./PatientStoryCard";
 import { cn } from "@/lib/utils";
 import { ServiceCard } from "./ServiceCard";
 import { SectionHeader } from "./SectionHeader";
-import { Stethoscope, TestTube, Heart, Sparkles } from "lucide-react";
-
-interface Doctor {
-  name: string;
-  specialization: string;
-  hospital: string;
-  experienceYears?: number;
-  rating?: number;
-  reviewsCount?: number;
-  price?: string;
-  verified?: boolean;
-  supportsVideo?: boolean;
-  languages?: string[];
-  nextAvailable?: string;
-  imageUrl?: string;
-  imageAlt?: string;
-}
+import {
+  DEFAULT_DOCTORS,
+  DEFAULT_LOCATION,
+  STATS,
+  AVAILABLE_DOCTORS,
+  PATIENT_STORIES,
+  SERVICES,
+  APP_BAR_SUPPORTING_TEXT,
+  APP_BAR_ACTION_LABEL,
+  AVAILABILITY_TABS,
+  type Doctor,
+} from "@/constants/demoData";
 
 interface HomeScreenProps {
   location?: string;
@@ -49,47 +35,9 @@ interface HomeScreenProps {
   onBannerClick?: () => void;
 }
 
-const defaultDoctors: Doctor[] = [
-  {
-    name: "Dr. Anjali Varma",
-    specialization: "Cardiologist",
-    hospital: "Apollo Hospital, Kochi",
-    experienceYears: 15,
-    rating: 4.9,
-    reviewsCount: 312,
-    price: "₹700 consultation",
-    verified: true,
-    supportsVideo: true,
-    languages: ["ML", "EN"],
-    nextAvailable: "Today 5:00 PM",
-    imageUrl:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuAzJ5xCIlZJ3BZf9da5AcLPer2VN74BK0vm9HulMdagZKxIuasqWuQlyukaEbTzPP2KiIXp7pU1TSGMzfx2LEQmwqKBZGx2ZQe7o2TVUQjyDFttrX-mztvy9hHxzNcK6FNKnZVGim4n1qRT3bl0inUTRV5w8Quqagce4SNnRMAEpXR69W1Z6l2dk5wFJV0tRY-LIU2ZEVXhTQNrSVDZgH4DcfMP656NPubVASXC18af88FicpsJTkEnIoK849hZxr6ocW2UBk4g6zHF",
-    imageAlt: "A portrait of Dr. Anjali Varma, a smiling female doctor.",
-  },
-  {
-    name: "Dr. Rajeev Kumar",
-    specialization: "Dentist",
-    hospital: "Aster Medcity, Kochi",
-    experienceYears: 12,
-    rating: 4.8,
-    reviewsCount: 234,
-    price: "₹500 consultation",
-    verified: true,
-    supportsVideo: false,
-    languages: ["ML", "EN", "HI"],
-    nextAvailable: "Today 4:30 PM",
-    imageUrl:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuDqjnjTU4a8Xl1hW5K-wyvJVqqzB7B5C-5PFvvYMWLhEL9-aV0acmgXwO-pWhGej8kNIvZzVpofLt0X2abnR6RFt1m17hRnfHEkJqd82BrPfCoSN6NOCSpsu09t86pX7iV16_xqR7K_JDbZsxT4QGyKKz-FWkcokYKNJdZcfaco3_rfL8hWBtboVxt0umMJ1OBuKJGGgAdh63GV1QsOMs3aF1_W_3T2JondS2QLt-9Z3fREHdxGPmrEN7p9rnI0hGyBbkIw2ixojQ4Z",
-    imageAlt: "A portrait of Dr. Rajeev Kumar, a professional male doctor.",
-  },
-];
-
-// const defaultBannerImage =
-//   "https://lh3.googleusercontent.com/aida-public/AB6AXuAO8F-zCsBz7r7noFw0nTlYgSYRiRFQwsDBRkh4k_Hte3hTQIz9pRReCVaTAF1TA2dSgjEbANHeQMo2xNAIq6zW0yrcasKtLxKXcf5b3F6t0O2D4UHW0ut7rEsD0PwGkhpbHOn515h1lCbS2uRGz5TgB2zS4gzHGRAj71Rs43FLkWqsO7jFKpxycT8sOmA3CxaTaaj4MY9hsyAUeJfatAvRwjcJj50UMA6gVSeOE8Je4jDM--yFfefDFFOAcrnJO1RWZ6Nk9CHgqsM3";
-
 export const HomeScreen = ({
-  location = "Kochi, Kerala",
-  doctors = defaultDoctors,
+  location = DEFAULT_LOCATION,
+  doctors = DEFAULT_DOCTORS,
   className,
   onNotificationClick,
   // onCategoryClick,
@@ -98,132 +46,6 @@ export const HomeScreen = ({
 HomeScreenProps) => {
   const [activeAvailabilityTab, setActiveAvailabilityTab] =
     useState("Available Now");
-
-  // const categories = [
-  //   { icon: Stethoscope, label: "Dentist", color: "primary" as const },
-  //   { icon: Sparkles, label: "Ayurveda", color: "secondary" as const },
-  //   { icon: TestTube, label: "Lab", color: "primary" as const },
-  //   { icon: Heart, label: "Physician", color: "primary" as const },
-  // ];
-
-  const stats = [
-    { label: "Verified Doctors", value: "2,450+" },
-    { label: "Happy Patients", value: "100K+", accent: "secondary" as const },
-    { label: "Govt. Approved", value: "Yes" },
-  ];
-
-  const availableDoctors = [
-    {
-      name: "Dr. Priya Menon",
-      specialization: "General Physician",
-      availability: "Available in 45 mins",
-      price: "₹400",
-      imageUrl:
-        "https://lh3.googleusercontent.com/aida-public/AB6AXuDqjnjTU4a8Xl1hW5K-wyvJVqqzB7B5C-5PFvvYMWLhEL9-aV0acmgXwO-pWhGej8kNIvZzVpofLt0X2abnR6RFt1m17hRnfHEkJqd82BrPfCoSN6NOCSpsu09t86pX7iV16_xqR7K_JDbZsxT4QGyKKz-FWkcokYKNJdZcfaco3_rfL8hWBtboVxt0umMJ1OBuKJGGgAdh63GV1QsOMs3aF1_W_3T2JondS2QLt-9Z3fREHdxGPmrEN7p9rnI0hGyBbkIw2ixojQ4Z",
-      imageAlt: "A portrait of Dr. Priya Menon",
-    },
-    {
-      name: "Dr. Anoop S.",
-      specialization: "Dentist",
-      availability: "Available in 20 mins",
-      price: "₹500",
-      imageUrl:
-        "https://lh3.googleusercontent.com/aida-public/AB6AXuAzJ5xCIlZJ3BZf9da5AcLPer2VN74BK0vm9HulMdagZKxIuasqWuQlyukaEbTzPP2KiIXp7pU1TSGMzfx2LEQmwqKBZGx2ZQe7o2TVUQjyDFttrX-mztvy9hHxzNcK6FNKnZVGim4n1qRT3bl0inUTRV5w8Quqagce4SNnRMAEpXR69W1Z6l2dk5wFJV0tRY-LIU2ZEVXhTQNrSVDZgH4DcfMP656NPubVASXC18af88FicpsJTkEnIoK849hZxr6ocW2UBk4g6zHF",
-      imageAlt: "A portrait of Dr. Anoop S.",
-    },
-    {
-      name: "Dr. Fatima K.",
-      specialization: "Pediatrician",
-      availability: "Available in 60 mins",
-      price: "₹600",
-      imageUrl:
-        "https://lh3.googleusercontent.com/aida-public/AB6AXuCE79aBEE7JnaJfDEWsCP9wR53LBX0i-fW2bHPQ-ZZXYVmMTOUe7VtvMsfvu5D59_YWFUKsie9L_qHAFtiADWkDcApvRP0D4sqUZ7M5yr7a63tKTor2nHHvmFuKYZ1aNBpNl-WUqt7ZLWrPV_wYXrGC-5Iz9_yjR232mcsxMLexOFr6mz9Rkvpg3wIUczNODA5Y8jpgMB1V6T-ilJCvBU7dS4H3tgTsKUtqjzoJ7_SzgAStRdvi3JDO0vreGL26g0tcTKmD5oUalI9P",
-      imageAlt: "A portrait of Dr. Fatima K.",
-    },
-  ];
-
-  // const infoItems = [
-  //   {
-  //     icon: CloudRain,
-  //     title: "Monsoon Health Tips",
-  //     description: "Stay safe this rainy season",
-  //     iconColor: "primary" as const,
-  //   },
-  //   {
-  //     icon: ShieldCheck,
-  //     title: "Common Conditions",
-  //     description: "Learn about local ailments",
-  //     iconColor: "secondary" as const,
-  //   },
-  //   {
-  //     icon: Leaf,
-  //     title: "Local Health Schemes",
-  //     description: "KAHS, PMJAY & more",
-  //     iconColor: "primary" as const,
-  //   },
-  // ];
-
-  const stories = [
-    {
-      quote:
-        '"Found an excellent Ayurveda doctor for my arthritis. Video consultation was so convenient!"',
-      name: "Lakshmi R.",
-      location: "Thrissur",
-    },
-    {
-      quote:
-        '"The booking process was seamless, and I found a great pediatrician for my son in minutes."',
-      name: "Arun P.",
-      location: "Kochi",
-    },
-  ];
-
-  const services = [
-    {
-      icon: Stethoscope,
-      title: "Hospitals & Clinics",
-      description: "230+ specialists",
-      statusBadge: {
-        type: "available" as const,
-        text: "Available now",
-      },
-      iconColor: "blue" as const,
-      href: "/services/hospitals",
-    },
-    {
-      icon: TestTube,
-      title: "Lab & Diagnostics",
-      description: "Home collection",
-      statusBadge: {
-        type: "location" as const,
-        text: "📍 42 nearby",
-      },
-      iconColor: "purple" as const,
-      href: "/services/lab-tests",
-    },
-    {
-      icon: Heart,
-      title: "Dental Services",
-      description: "Implants & more",
-      statusBadge: {
-        type: "rating" as const,
-        text: "4.8 rating",
-      },
-      iconColor: "teal" as const,
-      href: "/services/dental",
-    },
-    {
-      icon: Sparkles,
-      title: "Ayurveda Care",
-      description: "Traditional healing",
-      statusBadge: {
-        type: "certified" as const,
-        text: "Certified",
-      },
-      iconColor: "yellow" as const,
-      href: "/services/ayurveda",
-    },
-  ];
 
   return (
     <div
@@ -234,8 +56,8 @@ HomeScreenProps) => {
     >
       <AppBar
         location={location}
-        supportingText="8 hospitals within 5km"
-        actionLabel="Show all hospitals near you"
+        supportingText={APP_BAR_SUPPORTING_TEXT}
+        actionLabel={APP_BAR_ACTION_LABEL}
         onNotificationClick={onNotificationClick}
       />
       <SearchBar />
@@ -251,7 +73,7 @@ HomeScreenProps) => {
 
       {/* Stats */}
       <section className="flex justify-around bg-primary/10 dark:bg-primary/20 py-3 mx-4 rounded-lg border border-primary/20 dark:border-primary/30">
-        {stats.map((stat, index) => (
+        {STATS.map((stat, index) => (
           <StatsHighlight
             key={index}
             label={stat.label}
@@ -266,7 +88,7 @@ HomeScreenProps) => {
       <section className="flex flex-col pt-6">
         <SectionHeader title="Healthcare Services" viewAllLink="/services" />
         <div className="grid grid-cols-2 gap-3 px-4 pb-6">
-          {services.map((service, index) => (
+          {SERVICES.map((service, index) => (
             <ServiceCard
               key={index}
               icon={service.icon}
@@ -284,7 +106,7 @@ HomeScreenProps) => {
       <section className="flex flex-col pt-6">
         <SectionHeader title="Available Now" />
         <div className="flex border-b border-gray-200 dark:border-white/10 px-4">
-          {["Available Now", "Today's Slots", "Video Consult"].map((tab) => (
+          {AVAILABILITY_TABS.map((tab) => (
             <button
               key={tab}
               className={cn(
@@ -300,7 +122,7 @@ HomeScreenProps) => {
           ))}
         </div>
         <div className="flex gap-3 px-4 py-4 overflow-x-auto">
-          {availableDoctors.map((doctor, index) => (
+          {AVAILABLE_DOCTORS.map((doctor, index) => (
             <CompactDoctorCard
               key={index}
               name={doctor.name}
@@ -355,7 +177,7 @@ HomeScreenProps) => {
       <section className="flex flex-col pt-6">
         <SectionHeader title="Patient Stories" />
         <div className="flex gap-3 px-4 pb-3 overflow-x-auto">
-          {stories.map((story, index) => (
+          {PATIENT_STORIES.map((story, index) => (
             <PatientStoryCard
               key={index}
               quote={story.quote}
