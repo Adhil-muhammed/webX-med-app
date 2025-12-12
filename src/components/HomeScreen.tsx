@@ -21,16 +21,7 @@ import { CompactDoctorCard } from "./CompactDoctorCard";
 import { PatientStoryCard } from "./PatientStoryCard";
 import { cn } from "@/lib/utils";
 import { ServiceCard } from "./ServiceCard";
-import {
-  Stethoscope,
-  TestTube,
-  Heart,
-  Sparkles,
-  Pill,
-  Activity,
-  Calendar,
-  FileText,
-} from "lucide-react";
+import { Stethoscope, TestTube, Heart, Sparkles } from "lucide-react";
 
 interface Doctor {
   name: string;
@@ -190,60 +181,47 @@ export const HomeScreen = ({
   const services = [
     {
       icon: Stethoscope,
-      title: "Doctor Consultation",
-      description: "Book appointments with verified doctors",
-      badge: "Popular",
-      iconColor: "primary" as const,
-      href: "/services/consultation",
+      title: "Hospitals & Clinics",
+      description: "230+ specialists",
+      statusBadge: {
+        type: "available" as const,
+        text: "Available now",
+      },
+      iconColor: "blue" as const,
+      href: "/services/hospitals",
     },
     {
       icon: TestTube,
-      title: "Lab Tests",
-      description: "Book lab tests and health checkups",
-      iconColor: "blue" as const,
+      title: "Lab & Diagnostics",
+      description: "Home collection",
+      statusBadge: {
+        type: "location" as const,
+        text: "📍 42 nearby",
+      },
+      iconColor: "purple" as const,
       href: "/services/lab-tests",
     },
     {
       icon: Heart,
-      title: "Emergency Care",
-      description: "24/7 emergency medical assistance",
-      iconColor: "green" as const,
-      href: "/services/emergency",
+      title: "Dental Services",
+      description: "Implants & more",
+      statusBadge: {
+        type: "rating" as const,
+        text: "4.8 rating",
+      },
+      iconColor: "teal" as const,
+      href: "/services/dental",
     },
     {
       icon: Sparkles,
-      title: "Ayurveda",
-      description: "Traditional Ayurvedic treatments",
-      iconColor: "secondary" as const,
+      title: "Ayurveda Care",
+      description: "Traditional healing",
+      statusBadge: {
+        type: "certified" as const,
+        text: "Certified",
+      },
+      iconColor: "yellow" as const,
       href: "/services/ayurveda",
-    },
-    {
-      icon: Pill,
-      title: "Pharmacy",
-      description: "Order medicines online",
-      iconColor: "purple" as const,
-      href: "/services/pharmacy",
-    },
-    {
-      icon: Activity,
-      title: "Health Packages",
-      description: "Comprehensive health checkup packages",
-      iconColor: "primary" as const,
-      href: "/services/health-packages",
-    },
-    {
-      icon: Calendar,
-      title: "Follow-up Care",
-      description: "Schedule follow-up appointments",
-      iconColor: "blue" as const,
-      href: "/services/follow-up",
-    },
-    {
-      icon: FileText,
-      title: "Health Records",
-      description: "Access your medical records",
-      iconColor: "green" as const,
-      href: "/services/records",
     },
   ];
 
@@ -286,25 +264,25 @@ export const HomeScreen = ({
 
       {/* NEW: Services Section */}
       <section className="flex flex-col pt-6">
-        <div className="flex items-center justify-between px-4 pb-3">
-          <h3 className="text-text-primary-light dark:text-text-primary-dark text-lg font-bold leading-tight tracking-[-0.015em]">
-            Our Services
+        <div className="flex items-center justify-between px-4 pb-4">
+          <h3 className="text-[#111518] text-[20px] font-bold">
+            Healthcare Services
           </h3>
           <Link
             to="/services"
-            className="text-sm font-medium text-primary hover:underline"
+            className="text-[#1f8df4] text-sm font-semibold flex items-center hover:opacity-80"
           >
-            View all
+            View All
           </Link>
         </div>
-        <div className="grid grid-cols-2 gap-3 px-4 pb-4 sm:grid-cols-4">
-          {services.slice(0, 4).map((service, index) => (
+        <div className="grid grid-cols-2 gap-3 px-4 pb-6">
+          {services.map((service, index) => (
             <ServiceCard
               key={index}
               icon={service.icon}
               title={service.title}
               description={service.description}
-              badge={service.badge}
+              statusBadge={service.statusBadge}
               iconColor={service.iconColor}
               href={service.href}
             />

@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { ArrowRight } from "lucide-react";
+import { Star, CheckCircle2, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
@@ -7,27 +7,49 @@ interface ServiceCardProps {
   icon: LucideIcon;
   title: string;
   description?: string;
-  badge?: string;
-  iconColor?: "primary" | "secondary" | "blue" | "green" | "purple";
+  statusBadge?: {
+    type: "available" | "location" | "rating" | "certified";
+    text: string;
+    value?: string | number;
+  };
+  iconColor?:
+    | "primary"
+    | "secondary"
+    | "blue"
+    | "green"
+    | "purple"
+    | "teal"
+    | "yellow";
   href: string;
   className?: string;
 }
 
-const iconColorClasses = {
-  primary: "bg-primary/10 text-primary dark:bg-primary/20",
-  secondary: "bg-secondary/10 text-secondary dark:bg-secondary/20",
-  blue: "bg-blue-50 text-blue-600 dark:bg-blue-500/20 dark:text-blue-400",
-  green: "bg-green-50 text-green-600 dark:bg-green-500/20 dark:text-green-400",
-  purple:
-    "bg-purple-50 text-purple-600 dark:bg-purple-500/20 dark:text-purple-400",
+const gradientClasses = {
+  primary: "bg-gradient-to-br from-[#64B5F6] to-[#1976D2]",
+  secondary: "bg-gradient-to-br from-[#BA68C8] to-[#7B1FA2]",
+  blue: "bg-gradient-to-br from-[#64B5F6] to-[#1976D2]",
+  green: "bg-gradient-to-br from-[#4DB6AC] to-[#00796B]",
+  purple: "bg-gradient-to-br from-[#BA68C8] to-[#7B1FA2]",
+  teal: "bg-gradient-to-br from-[#4DB6AC] to-[#00796B]",
+  yellow: "bg-gradient-to-br from-[#FDD835] to-[#F57F17]",
+};
+
+const textColorClasses = {
+  primary: "text-blue-50",
+  secondary: "text-purple-50",
+  blue: "text-blue-50",
+  green: "text-teal-50",
+  purple: "text-purple-50",
+  teal: "text-teal-50",
+  yellow: "text-yellow-50",
 };
 
 export const ServiceCard = ({
   icon: Icon,
   title,
   description,
-  badge,
-  iconColor = "primary",
+  statusBadge,
+  iconColor = "blue",
   href,
   className,
 }: ServiceCardProps) => {
@@ -35,49 +57,56 @@ export const ServiceCard = ({
     <Link
       to={href}
       className={cn(
-        "group relative flex flex-col gap-3 rounded-xl",
-        "bg-white dark:bg-white/5",
-        "border border-gray-100 dark:border-white/10",
-        "p-4 transition-all duration-200",
-        "hover:shadow-md hover:border-primary/30 dark:hover:border-primary/50",
-        "hover:-translate-y-0.5",
-        "active:scale-[0.98]",
+        "group relative flex flex-col justify-between h-[180px] w-full rounded-[16px] p-4",
+        gradientClasses[iconColor],
+        "shadow-md hover:shadow-lg transition-shadow overflow-hidden",
         className
       )}
     >
-      {/* Badge */}
-      {badge && (
-        <span className="absolute top-3 right-3 text-[10px] font-bold uppercase tracking-wider text-primary bg-primary/10 dark:bg-primary/20 px-2 py-0.5 rounded-full">
-          {badge}
-        </span>
-      )}
+      {/* Decorative blur element */}
+      <div className="absolute right-[-10px] top-[-10px] bg-white/10 rounded-full w-24 h-24 blur-xl"></div>
 
       {/* Icon */}
-      <div
-        className={cn(
-          "flex h-12 w-12 items-center justify-center rounded-lg transition-transform duration-200 group-hover:scale-110",
-          iconColorClasses[iconColor]
-        )}
-      >
-        <Icon size={24} strokeWidth={2} />
+      <div className="z-10 bg-white/20 w-fit p-2 rounded-xl backdrop-blur-sm">
+        <Icon className="text-white text-[32px]" size={32} strokeWidth={2} />
       </div>
 
       {/* Content */}
-      <div className="flex flex-col gap-1">
-        <h3 className="text-base font-bold text-text-primary-light dark:text-text-primary-dark group-hover:text-primary transition-colors">
+      <div className="z-10 mt-auto">
+        <h4 className="text-white text-base font-bold leading-tight mb-1">
           {title}
-        </h3>
+        </h4>
         {description && (
-          <p className="text-sm text-text-secondary-light dark:text-text-secondary-dark line-clamp-2">
+          <p
+            className={cn(
+              "text-xs mb-2 opacity-90",
+              textColorClasses[iconColor]
+            )}
+          >
             {description}
           </p>
         )}
-      </div>
 
-      {/* Arrow Indicator */}
-      <div className="flex items-center gap-1 text-primary opacity-0 group-hover:opacity-100 transition-opacity">
-        <span className="text-sm font-medium">Learn more</span>
-        <ArrowRight size={16} />
+        {/* Status Badge */}
+        {statusBadge && (
+          <div className="flex items-center gap-1 bg-white/20 w-fit px-2 py-0.5 rounded-full backdrop-blur-md">
+            {statusBadge.type === "available" && (
+              <div className="size-1.5 rounded-full bg-[#00E676]"></div>
+            )}
+            {statusBadge.type === "rating" && (
+              <Star className="text-yellow-300 size-[10px] fill-current" />
+            )}
+            {statusBadge.type === "certified" && (
+              <CheckCircle2 className="text-white size-[10px]" />
+            )}
+            {statusBadge.type === "location" && (
+              <MapPin className="text-white size-[10px]" />
+            )}
+            <span className="text-white text-[10px] font-medium">
+              {statusBadge.text}
+            </span>
+          </div>
+        )}
       </div>
     </Link>
   );
