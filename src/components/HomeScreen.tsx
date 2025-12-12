@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { AppBar } from "./AppBar";
 import { SearchBar } from "./SearchBar";
-import { Link } from "react-router-dom";
 // import { CategoryCard } from "./CategoryCard";
-import { PromotionalBanner } from "./PromotionalBanner";
+// import { PromotionalBanner } from "./PromotionalBanner";
 import { DoctorCard } from "./DoctorCard";
 import { BottomNavigation } from "./BottomNavigation";
 // import {
@@ -21,6 +20,7 @@ import { CompactDoctorCard } from "./CompactDoctorCard";
 import { PatientStoryCard } from "./PatientStoryCard";
 import { cn } from "@/lib/utils";
 import { ServiceCard } from "./ServiceCard";
+import { SectionHeader } from "./SectionHeader";
 import { Stethoscope, TestTube, Heart, Sparkles } from "lucide-react";
 
 interface Doctor {
@@ -84,8 +84,8 @@ const defaultDoctors: Doctor[] = [
   },
 ];
 
-const defaultBannerImage =
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuAO8F-zCsBz7r7noFw0nTlYgSYRiRFQwsDBRkh4k_Hte3hTQIz9pRReCVaTAF1TA2dSgjEbANHeQMo2xNAIq6zW0yrcasKtLxKXcf5b3F6t0O2D4UHW0ut7rEsD0PwGkhpbHOn515h1lCbS2uRGz5TgB2zS4gzHGRAj71Rs43FLkWqsO7jFKpxycT8sOmA3CxaTaaj4MY9hsyAUeJfatAvRwjcJj50UMA6gVSeOE8Je4jDM--yFfefDFFOAcrnJO1RWZ6Nk9CHgqsM3";
+// const defaultBannerImage =
+//   "https://lh3.googleusercontent.com/aida-public/AB6AXuAO8F-zCsBz7r7noFw0nTlYgSYRiRFQwsDBRkh4k_Hte3hTQIz9pRReCVaTAF1TA2dSgjEbANHeQMo2xNAIq6zW0yrcasKtLxKXcf5b3F6t0O2D4UHW0ut7rEsD0PwGkhpbHOn515h1lCbS2uRGz5TgB2zS4gzHGRAj71Rs43FLkWqsO7jFKpxycT8sOmA3CxaTaaj4MY9hsyAUeJfatAvRwjcJj50UMA6gVSeOE8Je4jDM--yFfefDFFOAcrnJO1RWZ6Nk9CHgqsM3";
 
 export const HomeScreen = ({
   location = "Kochi, Kerala",
@@ -94,8 +94,8 @@ export const HomeScreen = ({
   onNotificationClick,
   // onCategoryClick,
   onDoctorBookClick,
-  onBannerClick,
-}: HomeScreenProps) => {
+}: // onBannerClick,
+HomeScreenProps) => {
   const [activeAvailabilityTab, setActiveAvailabilityTab] =
     useState("Available Now");
 
@@ -241,13 +241,13 @@ export const HomeScreen = ({
       <SearchBar />
 
       {/* Hero Banner */}
-      <PromotionalBanner
+      {/* <PromotionalBanner
         backgroundImage={defaultBannerImage}
         title="Kerala's Trusted Healthcare Partner"
         subtitle="Book appointments with ease."
         description="Find doctors, clinics, and labs near you."
         onClick={onBannerClick}
-      />
+      /> */}
 
       {/* Stats */}
       <section className="flex justify-around bg-primary/10 dark:bg-primary/20 py-3 mx-4 rounded-lg border border-primary/20 dark:border-primary/30">
@@ -264,17 +264,7 @@ export const HomeScreen = ({
 
       {/* NEW: Services Section */}
       <section className="flex flex-col pt-6">
-        <div className="flex items-center justify-between px-4 pb-4">
-          <h3 className="text-[#111518] text-[20px] font-bold">
-            Healthcare Services
-          </h3>
-          <Link
-            to="/services"
-            className="text-[#1f8df4] text-sm font-semibold flex items-center hover:opacity-80"
-          >
-            View All
-          </Link>
-        </div>
+        <SectionHeader title="Healthcare Services" viewAllLink="/services" />
         <div className="grid grid-cols-2 gap-3 px-4 pb-6">
           {services.map((service, index) => (
             <ServiceCard
@@ -292,9 +282,7 @@ export const HomeScreen = ({
 
       {/* Available Now */}
       <section className="flex flex-col pt-6">
-        <h3 className="text-text-primary-light dark:text-text-primary-dark text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-3">
-          Available Now
-        </h3>
+        <SectionHeader title="Available Now" />
         <div className="flex border-b border-gray-200 dark:border-white/10 px-4">
           {["Available Now", "Today's Slots", "Video Consult"].map((tab) => (
             <button
@@ -365,9 +353,7 @@ export const HomeScreen = ({
 
       {/* Patient Stories */}
       <section className="flex flex-col pt-6">
-        <h3 className="text-text-primary-light dark:text-text-primary-dark text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-3">
-          Patient Stories
-        </h3>
+        <SectionHeader title="Patient Stories" />
         <div className="flex gap-3 px-4 pb-3 overflow-x-auto">
           {stories.map((story, index) => (
             <PatientStoryCard
@@ -382,9 +368,7 @@ export const HomeScreen = ({
 
       {/* Book an Appointment */}
       <section className="flex flex-col pt-4">
-        <h3 className="text-text-primary-light dark:text-text-primary-dark text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-3">
-          Book an Appointment
-        </h3>
+        <SectionHeader title="Book an Appointment" />
         <div className="flex flex-col gap-4 px-4 pb-24">
           {doctors.map((doctor, index) => (
             <DoctorCard
