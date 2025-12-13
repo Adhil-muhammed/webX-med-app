@@ -20,7 +20,7 @@ interface ServiceCardProps {
     | "purple"
     | "teal"
     | "yellow";
-  href: string;
+  href?: string;
   className?: string;
 }
 
@@ -50,7 +50,7 @@ export const ServiceCard = ({
   description,
   statusBadge,
   iconColor = "blue",
-  href,
+  // href,
   className,
 }: ServiceCardProps) => {
   return (
