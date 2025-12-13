@@ -149,7 +149,7 @@ export const PATIENT_STORIES: PatientStory[] = [
 export const SERVICES: Service[] = [
   {
     icon: Stethoscope,
-    title: "Hospitals & Clinics",
+    title: "Doctor Consultations",
     description: "230+ specialists",
     statusBadge: {
       type: "available",
@@ -205,4 +205,66 @@ export const AVAILABILITY_TABS = [
   "Available Now",
   "Today's Slots",
   "Video Consult",
+];
+
+// Provider data for search results
+export interface SearchProvider {
+  name: string;
+  specialization?: string;
+  experience?: string;
+  location: string;
+  distance?: string;
+  rating?: number;
+  reviewsCount?: number;
+  nextAvailable?: string;
+  price?: string;
+  imageUrl?: string;
+  imageAlt?: string;
+  isClinic?: boolean;
+}
+
+export const SEARCH_PROVIDERS: SearchProvider[] = [
+  {
+    name: "Dr. Anitha Varma, MBBS, MD",
+    specialization: "General Physician",
+    experience: "15+ years experience",
+    location: "Ahalia Clinic, Palayam",
+    distance: "2.5 km away",
+    rating: 4.8,
+    reviewsCount: 120,
+    nextAvailable: "Next available: Today, 4:30 PM",
+    price: "₹400 Consultation Fee",
+    imageUrl:
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuDZGiErtJBPsDJvOJuWsoVshO2qW29wm_b34YtZ0Tx5gzqo5ULnInr1WcTMHmpqgUg95jPcRd4qNXlg0rdQ7oYAtDXV17EW0D-HqkqszCQOAy2jXPueRxVPfQbOhXzo_o261eSbNNWjVOgfJbfm411rwggHEZUutmJNDXFtTy0ENKVpSyiHyHj4_Tq79WfrMbRm6pWs9mvBf4ajxKMlXyDQivC4BDsU39fb3gSjwxBLSHFCgYJU1JeDkyiqxY3EVNG-Fbh2ONQnAKNR",
+    imageAlt: "Portrait of Dr. Anitha Varma",
+  },
+  {
+    name: "AyurCare Ayurveda Center",
+    specialization: "Ayurveda Clinic",
+    experience: "Est. 2005",
+    location: "Kowdiar, Trivandrum",
+    distance: "5.1 km away",
+    rating: 4.5,
+    reviewsCount: 88,
+    nextAvailable: "Next available: Tomorrow, 10:00 AM",
+    price: "₹650 Consultation Fee",
+    imageUrl:
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuDxo0oJ-c9z29UkcZaqMAFqkQhZCUoF69MZ8CxKO9G7Wh8x4KYmm8dAJiPxSCOo77Z9t30WFhcFGuWyoq4ev6NvhQBhQTVM-b_ceIWtaM_rva8A7ZM781S-35qZiQn3M8Tn73oO4cBZ9LIo1tbkSJ_zi8fc-MuSF8UPE8LTcY-UcZuagxRuV5ORMb-ciOpVYpn7nNxmAr_-3qK88HGRbR497p3K06E0f2hoJXPm6MmFx0sjK5WegfbpQESFuV7sTb1kpGs4LabH_f2F",
+    imageAlt: "Image of AyurCare Ayurveda Center entrance",
+    isClinic: true,
+  },
+  {
+    name: "Dr. Suresh Kumar, BAMS",
+    specialization: "Ayurvedic Physician",
+    experience: "20+ years experience",
+    location: "Dhanwantari Ayurveda, Sasthamangalam",
+    distance: "3.2 km",
+    rating: 4.9,
+    reviewsCount: 210,
+    nextAvailable: "Next available: Today, 6:00 PM",
+    price: "₹500 Consultation Fee",
+    imageUrl:
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuDXTNzstipxga3Z_nG7fuwmjZgS8GdLTr0WfOjr1vKRQyNUzzIiOHBnz5kJMiNAw4EIbvmxbsahbJivinKwoxlBjJtidPe4OmWNYkSMZZ93cTY-Sv2VGqKu3XsNXnMf5Edhr3NuHzMEEskXeGPYRjskcZ3JQND5mGgjEiEz6JlsrYTVkzdDuwFxm4S7RlXin2lVjRCf2qBkuiICVoktSI2tiLaO9jpjP5RUWUxiI3qSXV4J2BmkV_rP--pO-Wm3RZ_M87pb1hZXFp4w",
+    imageAlt: "Portrait of Dr. Suresh Kumar",
+  },
 ];

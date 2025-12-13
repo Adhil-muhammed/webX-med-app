@@ -55,7 +55,7 @@ export const ServiceCard = ({
 }: ServiceCardProps) => {
   return (
     <Link
-      to={href}
+      to={"#"}
       className={cn(
         "group relative flex flex-col justify-between h-[180px] w-full rounded-[16px] p-4",
         gradientClasses[iconColor],

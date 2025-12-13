@@ -25,6 +25,12 @@ export default {
         "text-primary-dark": "#F8F9FA",
         "text-secondary-light": "#6c757d",
         "text-secondary-dark": "#adb5bd",
+        "text-light": "#333333",
+        "text-dark": "#E0E0E0",
+        "card-light": "#FFFFFF",
+        "card-dark": "#1A2E25",
+        "chip-light": "#E0F2F1",
+        "chip-dark": "#26403C",
       },
       borderRadius: {
         DEFAULT: "0.5rem",

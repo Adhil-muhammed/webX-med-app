@@ -9,3 +9,6 @@ export { StatsHighlight } from "./StatsHighlight";
 export { CompactDoctorCard } from "./CompactDoctorCard";
 export { InfoListCard } from "./InfoListCard";
 export { PatientStoryCard } from "./PatientStoryCard";
+export { FilterChip } from "./FilterChip";
+export { ProviderCard } from "./ProviderCard";
+export { SearchResultsAppBar } from "./SearchResultsAppBar";
