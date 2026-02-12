@@ -1,4 +1,4 @@
-import { Search } from "lucide-react";
+import { Search, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
@@ -29,6 +29,10 @@ export const SearchBar = ({
     }
   };
 
+  const handleClear = () => {
+    onChange?.("");
+  };
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && !onChange) {
       handleClick();
@@ -49,7 +53,7 @@ export const SearchBar = ({
           {/* Input Field */}
           <Input
             type="search"
-            className="w-full h-full pl-12 pr-4 rounded-lg border-0 bg-transparent text-text-primary-light dark:text-text-primary-dark placeholder:text-text-secondary-light dark:placeholder:text-text-secondary-dark text-base font-normal focus-visible:ring-0 focus-visible:outline-none cursor-pointer"
+            className="w-full h-full pl-12 pr-12 rounded-lg border-0 bg-transparent text-text-primary-light dark:text-text-primary-dark placeholder:text-text-secondary-light dark:placeholder:text-text-secondary-dark text-base font-normal focus-visible:ring-0 focus-visible:outline-none cursor-pointer"
             placeholder={placeholder}
             value={value}
             onChange={(e) => onChange?.(e.target.value)}
@@ -57,6 +61,20 @@ export const SearchBar = ({
             onKeyDown={handleKeyDown}
             readOnly={!onChange}
           />
+          {/* Clear Button */}
+          {value && onChange && (
+            <button
+              type="button"
+              onClick={handleClear}
+              className="absolute right-4 flex items-center justify-center w-8 h-8 rounded-full hover:bg-gray-100 dark:hover:bg-white/10 transition-colors z-10"
+              aria-label="Clear search"
+            >
+              <X
+                size={18}
+                className="text-text-secondary-light dark:text-text-secondary-dark"
+              />
+            </button>
+          )}
         </div>
       </div>
     </div>
