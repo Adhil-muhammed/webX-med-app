@@ -12,3 +12,4 @@ export { PatientStoryCard } from "./PatientStoryCard";
 export { FilterChip } from "./FilterChip";
 export { ProviderCard } from "./ProviderCard";
 export { SearchResultsAppBar } from "./SearchResultsAppBar";
+export { DoctorProfilePage } from "./DoctorProfilePage";

@@ -14,5 +14,6 @@ export default defineConfig({
     host: "0.0.0.0", // Listen on all network interfaces
     port: 5173,
     strictPort: true,
+    allowedHosts: ["kitty-nonevangelical-unmedicinally.ngrok-free.dev"],
   },
 });
