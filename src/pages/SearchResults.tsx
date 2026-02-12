@@ -16,7 +16,13 @@ import {
 } from "@/constants/searchData";
 import { cn } from "@/lib/utils";
 
-type FilterType = "All" | "Specialty" | "Doctor" | "Hospital" | "Symptom" | "Procedure";
+type FilterType =
+  | "All"
+  | "Specialty"
+  | "Doctor"
+  | "Hospital"
+  | "Symptom"
+  | "Procedure";
 
 const FREQUENTLY_SEARCHED_SPECIALITIES = [
   "Dentist",
@@ -41,7 +47,7 @@ const CATEGORY_FILTERS: FilterType[] = [
 export const SearchResultsPage = () => {
   const location = useLocation();
   const [searchQuery, setSearchQuery] = useState<string>(
-    (location.state as { query?: string })?.query || ""
+    (location.state as { query?: string })?.query || "",
   );
   const [activeFilter, setActiveFilter] = useState<FilterType>("All");
 
@@ -63,7 +69,7 @@ export const SearchResultsPage = () => {
     let specialties = SPECIALTIES.filter(
       (specialty) =>
         specialty.title.toLowerCase().includes(query) ||
-        specialty.subtitle?.toLowerCase().includes(query)
+        specialty.subtitle?.toLowerCase().includes(query),
     );
 
     // Filter doctors
@@ -71,7 +77,7 @@ export const SearchResultsPage = () => {
       (doctor) =>
         doctor.name.toLowerCase().includes(query) ||
         doctor.specialization.toLowerCase().includes(query) ||
-        doctor.location.toLowerCase().includes(query)
+        doctor.location.toLowerCase().includes(query),
     );
 
     // Filter hospitals
@@ -80,14 +86,14 @@ export const SearchResultsPage = () => {
         hospital.name.toLowerCase().includes(query) ||
         hospital.category.toLowerCase().includes(query) ||
         hospital.address.toLowerCase().includes(query) ||
-        hospital.specialties.some((s) => s.toLowerCase().includes(query))
+        hospital.specialties.some((s) => s.toLowerCase().includes(query)),
     );
 
     // Filter symptoms
     let symptoms = SYMPTOMS.filter(
       (symptom) =>
         symptom.name.toLowerCase().includes(query) ||
-        symptom.description.toLowerCase().includes(query)
+        symptom.description.toLowerCase().includes(query),
     );
 
     // Filter procedures
@@ -95,7 +101,7 @@ export const SearchResultsPage = () => {
       (procedure) =>
         procedure.name.toLowerCase().includes(query) ||
         procedure.description.toLowerCase().includes(query) ||
-        procedure.specialty.toLowerCase().includes(query)
+        procedure.specialty.toLowerCase().includes(query),
     );
 
     // Apply category filter
@@ -145,7 +151,9 @@ export const SearchResultsPage = () => {
   }));
 
   // Separate featured and regular specialties
-  const regularSpecialties = filteredResults.specialties.filter((s) => !s.isFeatured);
+  const regularSpecialties = filteredResults.specialties.filter(
+    (s) => !s.isFeatured,
+  );
 
   const hasResults =
     filteredResults.specialties.length > 0 ||
@@ -157,7 +165,7 @@ export const SearchResultsPage = () => {
   return (
     <div
       className={cn(
-        "relative flex min-h-screen w-full flex-col group/design-root overflow-x-hidden bg-background-light dark:bg-background-dark"
+        "relative flex min-h-screen w-full flex-col group/design-root overflow-x-hidden bg-background-light dark:bg-background-dark",
       )}
     >
       <SearchResultsAppBar
@@ -183,7 +191,7 @@ export const SearchResultsPage = () => {
                   className={cn(
                     "flex items-center justify-between w-full px-4 py-3 text-left hover:bg-gray-50 dark:hover:bg-white/5 transition-colors",
                     index !== FREQUENTLY_SEARCHED_SPECIALITIES.length - 1 &&
-                      "border-b border-gray-200 dark:border-gray-700"
+                      "border-b border-gray-200 dark:border-gray-700",
                   )}
                 >
                   <span className="text-text-primary-light dark:text-text-primary-dark text-base font-normal leading-normal">
@@ -267,7 +275,6 @@ export const SearchResultsPage = () => {
   );
 };
 
-
 // Specialty List Item Component
 interface SpecialtyListItemProps {
   specialty: SpecialtyData;
@@ -314,13 +321,20 @@ const DoctorResultCard = ({ doctor }: DoctorResultCardProps) => {
       {/* Avatar */}
       <div className="relative shrink-0">
         <img
-          src={doctor.imageUrl || `https://api.dicebear.com/7.x/avataaars/svg?seed=${doctor.name}`}
+          src={
+            doctor.imageUrl ||
+            `https://api.dicebear.com/7.x/avataaars/svg?seed=${doctor.name}`
+          }
           alt={doctor.imageAlt || doctor.name}
           className="w-12 h-12 rounded-full bg-gray-200 dark:bg-gray-700"
         />
         {doctor.hasVideoConsult && (
           <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-purple-500 rounded-full flex items-center justify-center border-2 border-white dark:border-gray-800">
-            <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+            <svg
+              className="w-3 h-3 text-white"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
               <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z" />
             </svg>
           </div>
@@ -404,21 +418,27 @@ interface SymptomCardProps {
 
 const SymptomCard = ({ symptom }: SymptomCardProps) => {
   const Icon = symptom.icon;
-  
+
   return (
     <div className="p-3 bg-white dark:bg-card-dark rounded-lg border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition-colors">
       <div className="flex items-start gap-3">
-        <div className={cn(
-          "w-10 h-10 rounded-lg flex items-center justify-center shrink-0",
-          symptom.severity === "severe" && "bg-red-50 dark:bg-red-900/20",
-          symptom.severity === "moderate" && "bg-yellow-50 dark:bg-yellow-900/20",
-          symptom.severity === "mild" && "bg-green-50 dark:bg-green-900/20"
-        )}>
-          <Icon size={20} className={cn(
-            symptom.severity === "severe" && "text-red-600",
-            symptom.severity === "moderate" && "text-yellow-600",
-            symptom.severity === "mild" && "text-green-600"
-          )} />
+        <div
+          className={cn(
+            "w-10 h-10 rounded-lg flex items-center justify-center shrink-0",
+            symptom.severity === "severe" && "bg-red-50 dark:bg-red-900/20",
+            symptom.severity === "moderate" &&
+              "bg-yellow-50 dark:bg-yellow-900/20",
+            symptom.severity === "mild" && "bg-green-50 dark:bg-green-900/20",
+          )}
+        >
+          <Icon
+            size={20}
+            className={cn(
+              symptom.severity === "severe" && "text-red-600",
+              symptom.severity === "moderate" && "text-yellow-600",
+              symptom.severity === "mild" && "text-green-600",
+            )}
+          />
         </div>
 
         <div className="flex-1 min-w-0">
@@ -448,7 +468,7 @@ interface ProcedureCardProps {
 
 const ProcedureCard = ({ procedure }: ProcedureCardProps) => {
   const Icon = procedure.icon;
-  
+
   return (
     <div className="p-3 bg-white dark:bg-card-dark rounded-lg border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition-colors">
       <div className="flex items-start gap-3">
@@ -465,7 +485,9 @@ const ProcedureCard = ({ procedure }: ProcedureCardProps) => {
           </p>
           <div className="flex gap-3 mt-1 text-[11px] text-gray-500 dark:text-gray-500">
             {procedure.duration && <span>⏱ {procedure.duration}</span>}
-            {procedure.recoveryTime && <span>🏥 Recovery: {procedure.recoveryTime}</span>}
+            {procedure.recoveryTime && (
+              <span>🏥 Recovery: {procedure.recoveryTime}</span>
+            )}
           </div>
         </div>
 
@@ -476,4 +498,3 @@ const ProcedureCard = ({ procedure }: ProcedureCardProps) => {
     </div>
   );
 };
-
