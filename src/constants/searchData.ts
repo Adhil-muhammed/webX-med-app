@@ -11,8 +11,6 @@ import {
   Pill,
   Syringe,
   Thermometer,
-  BedDouble,
-  Building2,
   Shield,
   User,
   Smile,
