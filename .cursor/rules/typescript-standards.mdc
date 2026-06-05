@@ -1,0 +1,31 @@
+---
+description: TypeScript strict typing and component conventions
+globs: "**/*.{ts,tsx}"
+alwaysApply: false
+---
+
+# TypeScript Standards
+
+- Enable strict mode; never use `any`
+- Add explicit return types on exported functions and hooks
+- Use arrow function components
+
+## Separate UI from logic
+
+```tsx
+// Bad — logic mixed in component
+const Screen = () => {
+  const [data, setData] = useState(null);
+  useEffect(() => { fetch('/api').then(r => r.json()).then(setData); }, []);
+  return <Text>{data?.title}</Text>;
+};
+
+// Good — hook owns logic
+const Screen = (): React.ReactElement => {
+  const { data, isLoading } = useScreenData();
+  if (isLoading) return <LoadingFallback />;
+  return <Text>{data.title}</Text>;
+};
+```
+
+Place hooks in `src/hooks/`, types in `src/types/`.

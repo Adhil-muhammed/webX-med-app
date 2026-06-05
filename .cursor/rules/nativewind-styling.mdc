@@ -1,0 +1,25 @@
+---
+description: NativeWind styling and design token conventions
+globs: "src/**/*.{tsx,css}"
+alwaysApply: false
+---
+
+# NativeWind Styling
+
+Prefer `className` over ad-hoc `StyleSheet.create` for layout and typography.
+
+## Design tokens
+
+Reference shared tokens from `src/styles/tokens.ts` for colors and spacing that must stay consistent:
+
+```tsx
+// Good — token-backed semantic classes in tailwind.config.js theme.extend
+<View className="flex-1 bg-background px-4">
+  <Text className="text-xl font-bold text-foreground">Title</Text>
+</View>
+
+// Bad — hardcoded hex in StyleSheet
+<View style={{ backgroundColor: '#FFFFFF', paddingHorizontal: 16 }} />
+```
+
+Support dark/light mode via NativeWind `dark:` variants and token-based theme colors.

@@ -1,0 +1,31 @@
+---
+description: Expo Router file-based routing conventions
+globs: "src/app/**"
+alwaysApply: false
+---
+
+# Expo Router
+
+## Route files
+
+- `src/app/index.tsx` — home route
+- `src/app/<name>/index.tsx` — nested route
+- `src/app/_layout.tsx` — root providers and layout only
+
+## Route components stay thin
+
+```tsx
+// Bad — fetch and Redux in route file
+export default function ProfileRoute() {
+  const dispatch = useAppDispatch();
+  useEffect(() => { dispatch(fetchProfile()); }, [dispatch]);
+  return <ProfileView />;
+}
+
+// Good — route composes screen component
+export default function ProfileRoute(): React.ReactElement {
+  return <ProfileScreen />;
+}
+```
+
+Put providers (Redux, QueryClient, SafeArea) in `_layout.tsx`, not individual routes.

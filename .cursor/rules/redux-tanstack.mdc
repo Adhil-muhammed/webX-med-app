@@ -1,0 +1,37 @@
+---
+description: Redux Toolkit and TanStack Query separation of concerns
+globs: "src/{store,hooks,config}/**"
+alwaysApply: false
+---
+
+# Redux Toolkit + TanStack Query
+
+## State ownership
+
+- **TanStack Query** — server/async data (fetch, cache, refetch, optimistic updates)
+- **Redux Toolkit** — client/UI state shared across screens (auth session, filters, preferences)
+
+Do not duplicate server cache in Redux slices.
+
+## Query keys
+
+Use stable, hierarchical keys:
+
+```tsx
+// Good
+queryKey: ['doctors', { specialty, page }]
+
+// Bad
+queryKey: ['data']
+```
+
+## RTK slices
+
+Place slices in `src/store/slices/`. Export typed hooks from `src/store/hooks.ts`:
+
+```tsx
+const count = useAppSelector((state) => state.counter.value);
+const dispatch = useAppDispatch();
+```
+
+Configure the store in `src/store/index.ts` only.

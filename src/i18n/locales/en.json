@@ -1,0 +1,32 @@
+{
+  "auth": {
+    "heroTitle": "Your Health, Simplified.",
+    "heroSubtitle": "Enter your email to securely access your medical records.",
+    "emailLabel": "Email Address",
+    "emailPlaceholder": "name@example.com",
+    "sendVerificationCode": "Send Verification Code",
+    "legalPrefix": "By continuing, you agree to our",
+    "termsOfService": "Terms of Service",
+    "legalAnd": "and",
+    "privacyPolicy": "Privacy Policy",
+    "backToHome": "Back to Home",
+    "changeLanguage": "Change language",
+    "languageToggle": "English / Malayalam"
+  },
+  "dev": {
+    "homeTitle": "System Initialized",
+    "homeSubtitle": "Base Cover Ready for Phase 1 Implementation",
+    "welcomeLink": "Welcome (Stitch)",
+    "healthLink": "Health Check"
+  },
+  "health": {
+    "title": "Health Check",
+    "checking": "Checking health...",
+    "failed": "Health check failed",
+    "retry": "Retry",
+    "status": "Status",
+    "timestamp": "Timestamp",
+    "authReady": "Auth ready",
+    "backToHome": "Back to Home"
+  }
+}

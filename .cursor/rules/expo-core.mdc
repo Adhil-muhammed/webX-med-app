@@ -1,0 +1,31 @@
+---
+description: Core Expo project standards and mandatory workflow
+alwaysApply: true
+---
+
+# Expo Core
+
+Read https://docs.expo.dev/versions/v56.0.0/ before writing code.
+
+## Workflow
+
+1. Analyze — read existing files first
+2. Plan — list files and data flow; save to `docs/plans/`; wait for confirmation
+3. Implement — small, focused changes
+4. Review — network, font scaling, dark mode, background state
+
+## Imports
+
+Use the `@/` path alias for cross-module imports:
+
+```tsx
+// Good
+import { useHealthCheck } from '@/hooks/useHealthCheck';
+
+// Bad
+import { useHealthCheck } from '../../../hooks/useHealthCheck';
+```
+
+## Git
+
+Do not commit unless the user explicitly asks.

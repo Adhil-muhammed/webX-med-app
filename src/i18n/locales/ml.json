@@ -1,0 +1,32 @@
+{
+  "auth": {
+    "heroTitle": "നിങ്ങളുടെ ആരോഗ്യം, ലളിതമാക്കി.",
+    "heroSubtitle": "നിങ്ങളുടെ മെഡിക്കൽ റെക്കോർഡുകൾ സുരക്ഷിതമായി ആക്സസ് ചെയ്യാൻ ഇമെയിൽ നൽകുക.",
+    "emailLabel": "ഇമെയിൽ വിലാസം",
+    "emailPlaceholder": "name@example.com",
+    "sendVerificationCode": "വെരിഫിക്കേഷൻ കോഡ് അയയ്ക്കുക",
+    "legalPrefix": "തുടരുന്നതിലൂടെ, നിങ്ങൾ ഞങ്ങളുടെ",
+    "termsOfService": "സേവന നിബന്ധനകൾ",
+    "legalAnd": "ഒപ്പം",
+    "privacyPolicy": "സ്വകാര്യതാ നയം",
+    "backToHome": "ഹോമിലേക്ക് മടങ്ങുക",
+    "changeLanguage": "ഭാഷ മാറ്റുക",
+    "languageToggle": "English / മലയാളം"
+  },
+  "dev": {
+    "homeTitle": "സിസ്റ്റം തയ്യാറാക്കി",
+    "homeSubtitle": "ഫേസ് 1 നടപ്പാക്കലിനായി ബേസ് കവർ തയ്യാർ",
+    "welcomeLink": "സ്വാഗതം (Stitch)",
+    "healthLink": "ഹെൽത്ത് ചെക്ക്"
+  },
+  "health": {
+    "title": "ഹെൽത്ത് ചെക്ക്",
+    "checking": "ഹെൽത്ത് പരിശോധിക്കുന്നു...",
+    "failed": "ഹെൽത്ത് ചെക്ക് പരാജയപ്പെട്ടു",
+    "retry": "വീണ്ടും ശ്രമിക്കുക",
+    "status": "സ്റ്റാറ്റസ്",
+    "timestamp": "ടൈംസ്റ്റാമ്പ്",
+    "authReady": "ഓത്ത് തയ്യാർ",
+    "backToHome": "ഹോമിലേക്ക് മടങ്ങുക"
+  }
+}
